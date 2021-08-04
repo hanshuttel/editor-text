@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{The Neurion editor}
+\author{Hans Hüttel \and Michael Koldsgaard}
+\date{July 2021}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+The goal of this 
+
+\section{About handles}
+
+The association between handles and values (the set of bindings) is an environment in the usual sense of program semantics.
+
+Some actions modify values. Others modify handles and the association between handles and values.
+
+Handles can be internal or external. deBruijn indexes are examples of internal handles.
+
+\section{Edit actions}
+
+The editor supports
+
+\begin{itemize}
+    \item Operationer på AST'er
+\begin{itemize}
+    \item Indsætte AST, tilføje/slette søskendeknuder
+  
+** Flere niveauer af data
+
+  *** Samlingen af data som et AST
+  *** Et enkelt datum som et AST
+
+\end{itemize}
+ 
+\item Sammensatte handlinger kan defineres ved makroer (vis hvordan -
+  f.eks. kan sletning udtrykkes som at substituere med et hul)
+
+    
+\end{itemize}
+
+
+Alt dette kræver et sprog for AST'er (det er NPLs syntaks med huller
+tilføjet)
+
+
+* Typeannoteringer i editoren (annotere knuder med deres typer -
+skal det bare være "by need", så man laver typeinferens, når man skal
+annotere? Det er nok bedst sådan, men bør overvejes)
+
+\section{How edit actions modify the data}
+
+Alle data har et håndtag. Håndtag skal være entydige (Hvordan skal scopes repræsenteres? Lambda-lifting? -- relevant overvejelse for krydshenvisninger i forbindelse med modularisering)
+
+Håndtag skal have et tidsstempel – eller "den ældste committede"/"nyeste committede"
+
+En save-knap.
+
+\section{The implementation}
+
+(men kan det understøttes pænt i Elm?)
+
+** Det gode ved den nuværende implementation: Få primitiver
+** Det mindre gode: Mange specialiseringer (pga. manglende ad hoc-polymorfi)
+
+
+\section{Future work}
+
+En skønne dag: Genimplementere editoren i NPL
+
+
+\end{document}
