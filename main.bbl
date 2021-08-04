@@ -1,0 +1,12 @@
+\begin{thebibliography}{1}
+
+\bibitem{DBLP:conf/pepm/GodiksenHHLO21}
+Christian Godiksen, Thomas Herrmann, Hans H{\"{u}}ttel, Mikkel~Korup Lauridsen,
+  and Iman Owliaie.
+\newblock A type-safe structure editor calculus.
+\newblock In Sam Lindley and Torben~{\AE}. Mogensen, editors, {\em Proceedings
+  of the 2021 {ACM} {SIGPLAN} Workshop on Partial Evaluation and Program
+  Manipulation, PEPM@POPL 2021, Virtual Event, Denmark, January 18-19, 2021},
+  pages 1--13. {ACM}, 2021.
+
+\end{thebibliography}

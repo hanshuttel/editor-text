@@ -1,9 +1,12 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{xspace}
 
-\title{The Neurion editor}
-\author{Hans Hüttel \and Michael Koldsgaard}
-\date{July 2021}
+\newcommand{\editor}{\mbox{\textsf{SNE}}}
+
+\title{\editor  ~-- The Neurion editor}
+\author{Hans Hüttel \and Michael Koldsgaard \and Thomas Munk}
+\date{August 2021}
 
 \begin{document}
 
@@ -11,50 +14,56 @@
 
 \section{Introduction}
 
-The goal of this 
+This document outlines the design decisions underlying \editor.
 
-\section{About handles}
+\section{Handles and environments}
 
-The association between handles and values (the set of bindings) is an environment in the usual sense of program semantics.
+Every value in the knowledge base is bound by a name, which we call it
+its \emph{handle}. Handles are unique; the collection of values known
+is therefore an \emph{environment} in the usual sense of program
+semantics.
 
-Some actions modify values. Others modify handles and the association between handles and values.
+The environment is represented as a database.
 
-Handles can be internal or external. deBruijn indexes are examples of internal handles.
+We distinguish between internal and external handles. Internal handles
+are used by the database and are necessarily unique. External handles
+are used by the programmer and may not be unique.
+
+There are various approaches to representing internal
+handles. deBruijn indexes are examples of internal handles. Another
+possibility is to use sequences of atomic handles that denote nested
+scopes such that e.g. $a_3.a_7.a_2$ denotes the value with atomic
+handle $a_2$ found within the scope with atomic handle $a_7$, that is
+found within the scope with atomic handle $a_3$.
 
 \section{Edit actions}
 
-The editor supports
+We distinguish between edit actions that modify values, actions
+that modify the environment and actions that modify annotations.
+
+\subsection{Editing values}
+
+The editor supports the following atomic edit actions for values.
 
 \begin{itemize}
-    \item Operationer på AST'er
-\begin{itemize}
-    \item Indsætte AST, tilføje/slette søskendeknuder
-  
-** Flere niveauer af data
-
-  *** Samlingen af data som et AST
-  *** Et enkelt datum som et AST
-
-\end{itemize}
- 
-\item Sammensatte handlinger kan defineres ved makroer (vis hvordan -
-  f.eks. kan sletning udtrykkes som at substituere med et hul)
-
-    
+\item Introduce an AST
+\item Introduce AST nodes
+\item Delete AST nodes
 \end{itemize}
 
+These correspond to the atomic actions found in the editor calculus of 
+\cite{DBLP:conf/pepm/GodiksenHHLO21}. Composite actions can be defined
+using the control structures in the editor calculus. An example is
+that deletion can be defined as substituing $a$ by the hole $[\;]$.
 
-Alt dette kræver et sprog for AST'er (det er NPLs syntaks med huller
-tilføjet)
+\subsection{Editing annotations}
 
-
-* Typeannoteringer i editoren (annotere knuder med deres typer -
-skal det bare være "by need", så man laver typeinferens, når man skal
-annotere? Det er nok bedst sådan, men bør overvejes)
+Values can be annotated. Most notably, values can be annotated with
+types. Type annotations can be derived using type inference, but we
+can also explicitly type a value by declaring the type of its handle.
 
 \section{How edit actions modify the data}
 
-Alle data har et håndtag. Håndtag skal være entydige (Hvordan skal scopes repræsenteres? Lambda-lifting? -- relevant overvejelse for krydshenvisninger i forbindelse med modularisering)
 
 Håndtag skal have et tidsstempel – eller "den ældste committede"/"nyeste committede"
 
@@ -70,7 +79,14 @@ En save-knap.
 
 \section{Future work}
 
-En skønne dag: Genimplementere editoren i NPL
+Re-implement everything in NPL.
 
+\bibliographystyle{plain}
+\bibliography{editor}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
